@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>模擬搶票頁面</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+  #buyButton {
+    padding: 20px 40px;
+    font-size: 2em;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  #buyButton:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+  <h1>模擬搶票頁面</h1>
+  <p>這是一個模擬的搶票按鈕。Selenium 將會嘗試點擊它。</p>
+  <button id="buyButton">立即搶票！</button>
+</body>
+</html>
