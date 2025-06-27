@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>拓元搶票系統 - Demo</title>
 <style>
+  /* 頁面整體字體和背景顏色 */
   body {
     font-family: "微軟正黑體", sans-serif;
     background-color: #f8f8f8;
@@ -12,6 +13,7 @@
     margin: 0;
     padding: 0;
   }
+  /* 上方紅色標題區，字是白色的 */
   header {
     background-color: #d90000;
     color: white;
@@ -21,9 +23,11 @@
     margin: 0;
     font-size: 1.5em;
   }
+  /* 主要內容區往下推一點 */
   .container {
     margin-top: 50px;
   }
+  /* 讓表單看起來有白底和陰影，並且置中 */
   form {
     display: inline-block;
     text-align: left;
@@ -32,11 +36,13 @@
     border-radius: 10px;
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
   }
+  /* 表單標籤換行並且加粗 */
   label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
   }
+  /* 輸入框大小和邊框設定 */
   input[type="text"],
   input[type="datetime-local"] {
     width: 250px;
@@ -45,6 +51,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+  /* 按鈕設計成紅底白字，整個寬度滿版 */
   button {
     margin-top: 20px;
     width: 100%;
@@ -56,9 +63,11 @@
     font-size: 1em;
     cursor: pointer;
   }
+  /* 滑鼠移上去按鈕顏色變深一點 */
   button:hover {
     background-color: #a70000;
   }
+  /* 顯示結果的地方，文字變綠色、加粗 */
   #result {
     margin-top: 20px;
     font-weight: bold;
@@ -85,26 +94,35 @@
     <button type="submit">開始搶票</button>
   </form>
 
+  <!-- 這裡會顯示搶票結果 -->
   <div id="result"></div>
 </div>
 
 <script>
 document.getElementById("taskForm").addEventListener("submit", async (e) => {
-  e.preventDefault(); // 阻止表單的預設提交行為
+  e.preventDefault(); // 不讓表單送出後整頁刷新
+
+  // 把使用者填的東西抓出來組成一個物件
   const data = {
     event: e.target.event.value,
     datetime: e.target.datetime.value,
     price: e.target.price.value,
   };
-  // 使用 fetch API 向後端發送 POST 請求
+
+  // 用 fetch 發送給後端，這裡是本機的 Flask API
   const res = await fetch("http://127.0.0.1:5000/start-task", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data), // 將資料轉換為 JSON 字串
+    method: "POST", // 用 POST 送資料
+    headers: { "Content-Type": "application/json" }, // 告訴後端這是 JSON 格式
+    body: JSON.stringify(data), // 轉成 JSON 字串送出
   });
-  const result = await res.json(); // 解析後端回傳的 JSON 響應
-  document.getElementById("result").innerText = "結果: " + result.status; // 顯示結果
+
+  // 等後端回傳結果，然後解析成物件
+  const result = await res.json();
+
+  // 把後端回來的狀態顯示在頁面上，讓使用者知道結果
+  document.getElementById("result").innerText = "結果: " + result.status;
 });
 </script>
 </body>
 </html>
+
