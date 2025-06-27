@@ -4,17 +4,26 @@
 <meta charset="UTF-8">
 <title>模擬搶票頁面</title>
 <style>
-  body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+  /* 讓整頁字體用 Arial，文字置中，往下推一點 */
+  body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    margin-top: 100px; 
+  }
+
+  /* 搶票按鈕的大小和樣式 */
   #buyButton {
     padding: 20px 40px;
-    font-size: 2em;
-    background-color: #4CAF50; /* Green */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-size: 2em; /* 字體大一點 */
+    background-color: #4CAF50; /* 綠色背景 */
+    color: white; /* 文字白色 */
+    border: none; /* 沒有邊框 */
+    border-radius: 8px; /* 角落圓圓的 */
+    cursor: pointer; /* 滑鼠移過去會變手指 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 陰影效果，讓按鈕有層次 */
   }
+
+  /* 滑鼠移上去按鈕顏色變深 */
   #buyButton:hover {
     background-color: #45a049;
   }
@@ -23,6 +32,7 @@
 <body>
   <h1>模擬搶票頁面</h1>
   <p>這是一個模擬的搶票按鈕。Selenium 將會嘗試點擊它。</p>
+  <!-- 這個按鈕就是 Selenium 會找來點的目標 -->
   <button id="buyButton">立即搶票！</button>
 </body>
 </html>
