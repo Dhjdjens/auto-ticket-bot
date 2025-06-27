@@ -2,35 +2,32 @@ from selenium import webdriver
 import time
 
 def simulate_ticket_task():
-    # ***重要：請將此路徑修改為您電腦上實際的 test_ticket.html 檔案位置***
-    # 例如：file_path = "file:///C:/Users/您的用戶名/Desktop/拓元搶票系統/test_ticket.html"
-    file_path = "file:///C:/Users/lin/Desktop/拓元搶票系統/test_ticket.html" # 範例路徑，您需要替換成您自己的
+    # ***重要：請自行修改為本機的 test_ticket.html 路徑***
+    file_path = "file:///C:/Users/lin/Desktop/拓元搶票系統/test_ticket.html"
 
-    driver = None  # 確保 driver 初始為 None，以便正確關閉瀏覽器
+    driver = None
 
     try:
-        # 初始化 Chrome 瀏覽器。確保 chromedriver.exe 在您的 PATH 中或在同一資料夾中。
-        driver = webdriver.Chrome()
-        driver.get(file_path) # 載入模擬頁面
+        driver = webdriver.Chrome()  # 啟動 Chrome 瀏覽器（須先安裝 chromedriver）
+        driver.get(file_path)  # 載入模擬搶票頁面
 
-        for _ in range(20): # 嘗試點擊按鈕最多 20 次
+        for _ in range(20):  # 最多嘗試點擊按鈕 20 次
             try:
-                # 尋找 ID 為 "buyButton" 的元素
-                btn = driver.find_element("id", "buyButton")
-                if btn.is_displayed(): # 如果按鈕可見
-                    btn.click() # 點擊按鈕
+                btn = driver.find_element("id", "buyButton")  # 找按鈕
+                if btn.is_displayed():
+                    btn.click()  # 按鈕可見就點擊
                     if driver:
-                        driver.quit() # 成功後關閉瀏覽器
-                    return "success" # 返回成功狀態
-            except Exception as e:
-                pass # 若按鈕未出現或無法點擊，則忽略錯誤繼續嘗試
-            time.sleep(1) # 每次嘗試間隔 1 秒
+                        driver.quit()  # 成功後關閉瀏覽器
+                    return "success"  # 回傳成功訊息
+            except Exception:
+                pass  # 找不到或無法點擊就忽略錯誤繼續嘗試
+            time.sleep(1)  # 每次間隔一秒
 
         if driver:
-            driver.quit() # 嘗試 20 次後仍失敗，關閉瀏覽器
-        return "fail (按鈕沒出現或點不到)" # 返回按鈕未出現或點不到的失敗訊息
+            driver.quit()  # 嘗試 20 次仍失敗則關閉瀏覽器
+        return "fail (按鈕沒出現或點不到)"  # 回傳失敗訊息
 
     except Exception as e:
         if driver:
-            driver.quit() # 捕獲其他錯誤，並關閉瀏覽器
-        return f"error: {str(e)}" # 返回錯誤訊息
+            driver.quit()  # 發生錯誤時也要關瀏覽器
+        return f"error: {str(e)}"  # 回傳錯誤訊息
